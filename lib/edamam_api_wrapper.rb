@@ -12,7 +12,7 @@ class EdamamApiWrapper
 
     if data["hits"]
       my_recipes = data["hits"].map do |recipe_hash|
-            Recette.new(label: recipe_hash["recipe"]["label"])
+            Recette.new(recipe_hash["recipe"])
           end
       return my_recipes
     else

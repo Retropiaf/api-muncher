@@ -15,6 +15,7 @@
   <% if @recipes.count > 0 %>
     <% @recipes.each do |recipe| %>
       <article class="recipe-box column">
+        <li><img src="<%= recipe.image %>" alt="<%= recipe.title %>"></li>
         <li><h4><%= recipe.title %></h4></li>
         <li><%= link_to "See recipe", recette_path(recipe.title) %></li>
       </article>
