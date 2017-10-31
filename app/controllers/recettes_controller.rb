@@ -5,5 +5,10 @@ class RecettesController < ApplicationController
   end
 
   def show
+    # if params[:id] == nil
+    #   redirect_to root_path
+    # else
+      @recipe = params[:id]
+    # end
   end
 end
