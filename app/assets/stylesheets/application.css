@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+/* PAGINATION */ /* Move to index CSS? */
+.pagination a, .pagination button {
+  display: inline;
+}
