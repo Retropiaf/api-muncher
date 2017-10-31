@@ -1,8 +1,8 @@
 class Recette
   attr_reader :title
 
-  def initialize(label)
-    raise ArgumentError if label == nil || label == ""
-    @title = label
+  def initialize(hash)
+    raise ArgumentError if hash[:label] == nil || hash[:label] == ""
+    @title = hash[:label]
   end
 end

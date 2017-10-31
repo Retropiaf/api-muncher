@@ -11,9 +11,8 @@ class EdamamApiWrapper
     data = HTTParty.get(url)
 
     if data["hits"]
-      my_recipes = data["hits"].each do |recipe_hash|
-
-            Recette.new(recipe_hash["recipe"]["label"])
+      my_recipes = data["hits"].map do |recipe_hash|
+            Recette.new(label: recipe_hash["recipe"]["label"])
           end
       return my_recipes
     else
