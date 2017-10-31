@@ -1,2 +1,21 @@
 <h1>Recettes#index</h1>
-<p>Find me in app/views/recettes/index.html.erb</p>
+<p>!!!!!Find me in app/views/recettes/index.html.erb</p>
+
+<p>Ha!</p>
+
+<%= form_tag recettes_path(@item), method: "get" do %>
+  <%= label_tag(:item, "Enter Item") %>
+  <%= text_field_tag(:item) %>
+  <%= submit_tag("Send") %>
+<% end %>
+
+<ul>
+  <% if @recipes.count > 0 %>
+    <% @recipes.each do |recipe| %>
+    <li><%= link_to recipe["recipe"]["label"], recette_path(recipe["recipe"]["label"]) %></li>
+    <% end %>
+  <% else %>
+    <p>Noting to show</p>
+    <%= @recipes.inspect %>
+  <% end %>
+</ul>
