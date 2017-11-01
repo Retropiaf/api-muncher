@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
 
     if auth_hash['uid']
-      user = User.find_by(provider: auth_hash[:provider], uid: auth_hash[:uid])
+      user = User.find_by(email: auth_hash[:email])
 
       if user.nil?
         user = User.from_auth_hash(auth_hash, auth_hash['provider'])

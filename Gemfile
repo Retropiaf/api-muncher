@@ -37,6 +37,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem "omniauth"
 gem "omniauth-github"
 gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

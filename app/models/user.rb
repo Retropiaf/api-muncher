@@ -4,8 +4,8 @@ class User < ApplicationRecord
     user = new
     user.provider = provider
     user.uid = auth_hash['uid']
-  
-    if provider == "google_oauth2"
+
+    if provider == "google_oauth2" || provider == "facebook"
       user.username = auth_hash['info']['name']
     else
       user.username = auth_hash['info']['nickname']
