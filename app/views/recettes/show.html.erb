@@ -13,14 +13,29 @@
 </ul>
 
 <h3>Nutrients</h3>
-<ul>
-  <% @recipe.nutrients.each do |nutrient_hash| %>
-    <li>Total <%= nutrient_hash["label"] %>: <%= nutrient_hash["total"].to_i.to_s %><%= nutrient_hash["unit"] %></li>
-    <% unless nutrient_hash["sub"] == nil || nutrient_hash["sub"].length == 0 %>
-      <% nutrient_hash["sub"].each do |detail_hash| %>
-        <li><%= detail_hash["label"] %></li>
 
-      <% end %>
+<table>
+  <tr>
+    <th>Nutrient</th>
+    <th>Amount</th>
+    <th>Daily need</th>
+  </tr>
+  <% @recipe.nutrients.each do |nutrient_hash| %>
+    <% unless nutrient_hash["total"].to_i == 0 %>
+      <tr>
+        <th><%= nutrient_hash["label"] %></th>
+        <th><%= nutrient_hash["total"].to_i.to_s %><%= nutrient_hash["unit"] %></th>
+          <% found = false %>
+          <% @recipe.dailyneed.each do |dailyneed_hash| %>
+            <% if dailyneed_hash[1]["label"] == nutrient_hash["label"] %>
+              <% found = true %>
+              <th><%= dailyneed_hash[1]["quantity"].to_i.to_s %><%= dailyneed_hash[1]["unit"] %></th>
+            <% end %>
+          <% end %>
+          <% if found == false %>
+            <th>N/A</th>
+          <% end %>
+      </tr>
     <% end %>
   <% end %>
-</ul>
+</table>
