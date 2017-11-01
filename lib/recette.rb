@@ -1,5 +1,5 @@
 class Recette
-  attr_reader :title, :image, :url, :ingredients, :calories
+  attr_reader :title, :image, :url, :ingredients, :calories, :nutrients
   NO_IMAGE = "https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
 
   def initialize(hash)
@@ -27,6 +27,12 @@ class Recette
       else
         @calories = "No calories info"
       end
+    end
+
+    if hash["digest"].empty?
+      @nutrients = "No Nutritional info"
+    else
+      @nutrients = hash["digest"]
     end
 
   end

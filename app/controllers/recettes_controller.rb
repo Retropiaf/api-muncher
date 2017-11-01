@@ -8,7 +8,15 @@ class RecettesController < ApplicationController
     # if params[:id] == nil
     #   redirect_to root_path
     # else
-      @recipe = params[:id]
+      # @recipe = params[:id]
+      @recipes = EdamamApiWrapper.list_recipes(params[:item])
+      @recipe = nil
+      @recipes.each do |recipe_object|
+        if recipe_object.title == params[:id]
+          return @recipe = recipe_object
+        end
+      end
+
     # end
   end
 end

@@ -1,12 +1,26 @@
-<h1>Recipe for <%=@recipe%></h1>
+<h1>Recipe for <%=@recipe.title%></h1>
 
-<%= link_to "See the original recipe", params[:url], class: "button" %>
 
-<h4><%= params[:calories] %></h4>
+<%= link_to "See the original recipe", @recipe.url, class: "button" %>
+
+<h4><%= @recipe.calories %></h4>
 
 <h3>Ingredients</h3>
 <ul>
-  <% params[:ingredients].each do |ingredient| %>
+  <% @recipe.ingredients.each do |ingredient| %>
   <li><%= ingredient %></li>
+  <% end %>
+</ul>
+
+<h3>Nutrients</h3>
+<ul>
+  <% @recipe.nutrients.each do |nutrient_hash| %>
+    <li>Total <%= nutrient_hash["label"] %>: <%= nutrient_hash["total"].to_i.to_s %><%= nutrient_hash["unit"] %></li>
+    <% unless nutrient_hash["sub"] == nil || nutrient_hash["sub"].length == 0 %>
+      <% nutrient_hash["sub"].each do |detail_hash| %>
+        <li><%= detail_hash["label"] %></li>
+
+      <% end %>
+    <% end %>
   <% end %>
 </ul>
