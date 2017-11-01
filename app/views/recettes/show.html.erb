@@ -2,6 +2,8 @@
 
 <%= link_to "See the original recipe", params[:url], class: "button" %>
 
+<h4><%= params[:calories] %></h4>
+
 <h3>Ingredients</h3>
 <ul>
   <% params[:ingredients].each do |ingredient| %>
