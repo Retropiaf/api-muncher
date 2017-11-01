@@ -34,6 +34,9 @@ gem 'httparty'
 
 gem 'will_paginate', '~> 3.1.0'
 
+gem "omniauth"
+gem "omniauth-github"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
