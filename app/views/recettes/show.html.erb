@@ -1,9 +1,50 @@
-<h1>Recipe for <%=@recipe.title%></h1>
+<h1><%=@recipe.title%></h1>
+<% unless @recipe.source == nil %>
+  <p>By <%=@recipe.source%></p>
+<% end %>
 
+<img src="<%= @recipe.image %>" alt="<%= @recipe.title %>">
 
 <%= link_to "See the original recipe", @recipe.url, class: "button" %>
 
 <h4><%= @recipe.calories %></h4>
+
+<h4>Dietary Labels:</h4>
+<% if @recipe.diet_labels == nil && @recipe.health_labels == nil %>
+  No labels
+<% else %>
+  <% count = 0 %>
+  <% @recipe.diet_labels.each do |label| %>
+    <% count += 1 %>
+    <% unless @recipe.health_labels == nil && count == @recipe.diet_labels.length %>
+      <span><%= label %>,</span>
+    <% else %>
+      <span><%= label %></span>
+    <% end %>
+  <% end %>
+  <% count = 0 %>
+  <% @recipe.health_labels.each do |label| %>
+    <% count += 1 %>
+    <% unless count == @recipe.health_labels.length %>
+      <span><%= label %>,</span>
+    <% else %>
+      <span><%= label %></span>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% unless @recipe.allergies == nil %>
+  <h4>Allergy concerns:</h4>
+  <% count = 0 %>
+  <% @recipe.allergies.each do |allergy| %>
+    <% count += 1 %>
+    <% unless count == @recipe.allergies.length %>
+      <span><%= allergy %>,</span>
+    <% else %>
+      <span><%= allergy %></span>
+    <% end %>
+  <% end %>
+<% end %>
 
 <h3>Ingredients</h3>
 <ul>
