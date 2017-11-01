@@ -9,20 +9,20 @@ class Recette
 
     hash["image"] ? @image = hash["image"] : @image = NO_IMAGE
 
-    hash["url"] ? @url = hash["url"] : @url = www.google.com
+    hash["url"] ? @url = hash["url"] : @url = nil
 
     hash["source"] ? @source = hash["source"] : @source = nil
 
-    hash["dietLabels"] ? @diet_labels = hash["dietLabels"] : @diet_labels = nil
+    hash["dietLabels"] && hash["dietLabels"].count > 0 ? @diet_labels = hash["dietLabels"] : @diet_labels = nil
 
-    hash["healthLabels"] ? @health_labels = hash["healthLabels"] : @health_labels = nil
+    hash["healthLabels"] && hash["healthLabels"].count > 0 ? @health_labels = hash["healthLabels"] : @health_labels = nil
 
-    hash["ingredientLines"].count > 0 ? @ingredients = hash["ingredientLines"] : @ingredients = ["No ingredient found"]
+    hash["ingredientLines"] && hash["ingredientLines"].count > 0 ? @ingredients = hash["ingredientLines"] : @ingredients = ["No ingredient found"]
 
-    hash["cautions"].count > 0 ? @allergies = hash["cautions"] : @allergies = nil
+    hash["cautions"] && hash["cautions"].count > 0 ? @allergies = hash["cautions"] : @allergies = nil
 
     calories = hash["calories"]
-    if hash["yield"]
+    if hash["yield"] && hash["yield"].to_f > 0
       if calories
         @calories = (hash["calories"].to_f/hash["yield"].to_f).to_i.to_s + " calories per serving"
       else
@@ -36,13 +36,13 @@ class Recette
       end
     end
 
-    if hash["digest"].empty?
+    if hash["digest"] == nil || hash["digest"].empty?
       @nutrients = {}
     else
       @nutrients = hash["digest"]
     end
 
-    if hash["totalDaily"].empty?
+    if hash["totalDaily"] == nil || hash["totalDaily"].empty?
       @dailyneed = {}
     else
       @dailyneed = hash["totalDaily"]
