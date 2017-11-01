@@ -1,3 +1,10 @@
 <h1>Recipe for <%=@recipe%></h1>
 
-<%= link_to "See the original recipe", params[:url] %>
+<%= link_to "See the original recipe", params[:url], class: "button" %>
+
+<h3>Ingredients</h3>
+<ul>
+  <% params[:ingredients].each do |ingredient| %>
+  <li><%= ingredient %></li>
+  <% end %>
+</ul>
