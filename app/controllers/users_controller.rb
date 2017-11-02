@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_action :find_user
 
-  def favorites
+  def favorite
     if @user.favorites.include? params["title"]
       @user.favorites.delete(params["title"])
       if @user.save
@@ -23,6 +23,12 @@ class UsersController < ApplicationController
       end
     end
     redirect_back fallback_location: root_path
+  end
+
+  def favorites
+    @user.favorites.each do |recipe_title|
+      
+    end
   end
 
   private
