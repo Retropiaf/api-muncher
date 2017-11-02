@@ -15,7 +15,13 @@ describe EdamamApiWrapper do
     VCR.use_cassette("recipes") do
       recipes = EdamamApiWrapper.list_recipes("apple", "BOGUS", "SUPERBOGUUUUS")
       recipes.must_equal false
-
+    end
+  end
+  it "Can find a particular recipe" do
+    VCR.use_cassette("recipes") do
+      recipe = EdamamApiWrapper.find_recipe("Apple Chips")
+      recipe.must_be_instance_of Recette
+      recipe.title.must_be "Apple Chips"
     end
   end
 end
