@@ -1,5 +1,7 @@
 require 'httparty'
 
+# TODO: USE .present? instead of checking if not nil and not empty
+
 class EdamamApiWrapper
   BASE_URL = "https://api.edamam.com/search?"
   ID = ENV["ID"]

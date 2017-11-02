@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
 
     if auth_hash['uid']
-      user = User.find_by(email: auth_hash[:email])
+      user = User.find_by(email: auth_hash[:info][:email])
 
       if user.nil?
         user = User.from_auth_hash(auth_hash, auth_hash['provider'])
@@ -17,9 +17,16 @@ class SessionsController < ApplicationController
           flash[:message] = "Unable to save user"
         end
       else
-        session[:user_id] = user.id
-        flash[:status] = :success
-        flash[:message] = "Logged in successfully"
+        if params[:provider] == user.provider
+          session[:user_id] = user.id
+          flash[:status] = :success
+          flash[:message] = "Logged in successfully"
+        else
+          params[:provider] == "google_oauth2" ? pretty_provider = "Google" : pretty_provider = params[:provider].capitalize
+
+          flash[:status] = :failure
+          flash[:message] = "You already own an account through #{pretty_provider}."
+        end
       end
     else
       flash[:status] = :failure

@@ -1,14 +1,17 @@
 class RecettesController < ApplicationController
   def index
-    @recipes = EdamamApiWrapper.list_recipes(params["item"]).paginate(:page => params[:page], per_page: 9)
+    non_paginated_recipes = EdamamApiWrapper.list_recipes(params["item"])
+
+    unless non_paginated_recipes == false
+      non_paginated_recipes == []
+    end
+
+    @recipes = non_paginated_recipes.paginate(:page => params[:page], per_page: 9)
     render :index
   end
 
   def show
-    # if params[:id] == nil
-    #   redirect_to root_path
-    # else
-      # @recipe = params[:id]
+    # TODO: Check if I can just call non-paginated-recipes
       @recipes = EdamamApiWrapper.list_recipes(params[:item])
       @recipe = nil
       @recipes.each do |recipe_object|
