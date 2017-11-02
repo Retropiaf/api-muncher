@@ -11,7 +11,7 @@ describe EdamamApiWrapper do
       end
     end
   end
-  it "return [] for a broken request" do
+  it "returns false for a broken request" do
     VCR.use_cassette("recipes") do
       recipes = EdamamApiWrapper.list_recipes("apple", "BOGUS", "SUPERBOGUUUUS")
       recipes.must_equal false
@@ -22,6 +22,12 @@ describe EdamamApiWrapper do
       recipe = EdamamApiWrapper.find_recipe("Apple Chips")
       recipe.must_be_instance_of Recette
       recipe.title.must_be "Apple Chips"
+    end
+  end
+  it "returns false for a broken request" do
+    VCR.use_cassette("recipes") do
+      recipe = EdamamApiWrapper.find_recipe("Apple Chips", "BOGUS", "SUPERBOGUUUUS")
+      recipe.must_equal false
     end
   end
 end
