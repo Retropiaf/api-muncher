@@ -4,12 +4,12 @@ class SessionsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
 
     if auth_hash['uid']
-      user = User.find_by(email: auth_hash[:info][:email])
+      @user = User.find_by(email: auth_hash[:info][:email])
 
-      if user.nil?
-        user = User.from_auth_hash(auth_hash, auth_hash['provider'])
-        if user.save
-          session[:user_id] = user.id
+      if @user.nil?
+        @user = User.from_auth_hash(auth_hash, auth_hash['provider'])
+        if @user.save
+          session[:user_id] = @user.id
           flash[:status] = :success
           flash[:message] = "Logged in successfully"
         else
@@ -17,8 +17,8 @@ class SessionsController < ApplicationController
           flash[:message] = "Unable to save user"
         end
       else
-        if params[:provider] == user.provider
-          session[:user_id] = user.id
+        if params[:provider] == @user.provider
+          session[:user_id] = @user.id
           flash[:status] = :success
           flash[:message] = "Logged in successfully"
         else

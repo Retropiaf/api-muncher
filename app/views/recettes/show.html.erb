@@ -3,9 +3,16 @@
   <p>By <%=@recipe.source%></p>
 <% end %>
 
-
-
+<img src="<%= @recipe.image %>" alt="<%= @recipe.title %>">
 <%= link_to "See the original recipe", @recipe.url, class: "button" %>
+
+<% if session[:user_id] %>
+  <% if User.find_by(id: session[:user_id]).favorites.include? @recipe.title %>
+    <%= link_to "Remove from favorites", favorites_path(session[:user_id], :title => @recipe.title), class: "button" %>
+  <% else %>
+    <%= link_to "Add to favorites", favorites_path(session[:user_id], :title => @recipe.title), class: "button" %>
+  <% end %>
+<% end %>
 
 <h4><%= @recipe.calories %></h4>
 
