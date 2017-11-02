@@ -19,8 +19,13 @@ class RecettesController < ApplicationController
       #   end
       # end
 
-    return redirect_to root_path if @recipe == false
 
-    @recipe = EdamamApiWrapper.find_recipe(params["item"])
+
+    @recipe = EdamamApiWrapper.find_recipe(params["item"], params["id"])
+    if @recipe == false
+      flash[:status] = :failure
+      flash[:message] = "Could not find \"#{params["id"]}\" recipe"
+      return redirect_back(fallback_location: root_path)
+    end
   end
 end

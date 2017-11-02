@@ -24,7 +24,7 @@ class EdamamApiWrapper
     end
   end
 
-  def self.find_recipe(item, key = nil, id = nil)
+  def self.find_recipe(item, recip_id, key = nil, id = nil)
     key ||= KEY
     id ||= ID
     url = URI.encode(BASE_URL + "app_id=#{id}" + "&app_key=#{key}" + "&q=#{item}") + "&to=100"
@@ -37,11 +37,11 @@ class EdamamApiWrapper
       end
 
       my_recipes.each do |recipe_object|
-        if recipe_object.title == item
+        if recipe_object.title == recip_id
           return recipe_object
         end
       end
-      return false
     end
+    return false
   end
 end
