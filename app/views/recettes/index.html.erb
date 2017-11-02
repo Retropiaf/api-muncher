@@ -1,6 +1,6 @@
 
 
-<%= form_tag recettes_path(@item), method: "get" do %>
+<%= form_tag recettes_path, method: "get" do %>
   <%= text_field_tag(:item) %>
   <%= submit_tag("Search")%>
 <% end %>
