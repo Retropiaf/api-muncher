@@ -2,7 +2,7 @@ class RecettesController < ApplicationController
   def index
     non_paginated_recipes = EdamamApiWrapper.list_recipes(params["item"])
 
-    non_paginated_recipes == [] if non_paginated_recipes == false
+    non_paginated_recipes = [] if non_paginated_recipes == false
 
     @recipes = non_paginated_recipes.paginate(:page => params[:page], per_page: 9)
 

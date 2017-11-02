@@ -3,6 +3,31 @@ class UsersController < ApplicationController
   before_action :find_user
 
   def favorite
+    # found = false
+    # @user.favorites.each do |recipe|
+    #   if recipe.title == recipe.title
+    #     found = true
+    #     @user.favorites.delete(recipe)
+    #     if @user.save
+    #       flash[:status] = :success
+    #       flash[:message] = "#{recipe.title} was deleted from your favorites"
+    #     else
+    #       lash[:status] = :failure
+    #       flash[:message] = "#{recipe.title} couldn't be deleted from your favorites"
+    #     end
+    #   end
+    # end
+    # if found == false
+    #   @user.favorites << @recipe
+    #   if @user.save
+    #     flash[:status] = :success
+    #     flash[:message] = "#{recipe.title} was added to your favorites"
+    #   else
+    #     lash[:status] = :failure
+    #     flash[:message] = "#{recipe.title} couldn't be added to your favorites"
+    #   end
+    # end
+
     if @user.favorites.include? params["title"]
       @user.favorites.delete(params["title"])
       if @user.save
@@ -26,9 +51,11 @@ class UsersController < ApplicationController
   end
 
   def favorites
+    @favorites = []
     @user.favorites.each do |recipe_title|
-      
+      @favorites << recipe_title
     end
+    return @favorites
   end
 
   private
