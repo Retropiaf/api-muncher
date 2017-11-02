@@ -37,7 +37,7 @@ class EdamamApiWrapper
       end
 
       my_recipes.each do |recipe_object|
-        if recipe_object.title == recip_id
+        if recipe_object.uri == recip_id
           return recipe_object
         end
       end
