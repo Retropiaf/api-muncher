@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   resources :recettes, only: [:index, :show]
 
-  get "/users/:id/favorite", to: "users#favorite", as: 'favorite'
   get "/users/:id/favorites", to: "users#favorites", as: 'favorites'
 
   get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'

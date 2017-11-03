@@ -7,10 +7,17 @@
 <%= link_to "See the original recipe", @recipe.url, class: "button" %>
 
 <% if session[:user_id] %>
+<<<<<<< HEAD
   <% if User.find_by(id: session[:user_id]).favorite.include? @recipe.uri %>
     <%= link_to "Remove from favorites", favorite_path(session[:user_id], :uri => @recipe.uri), class: "button" %>
   <% else %>
     <%= link_to "Add to favorites", favorite_path(session[:user_id], :uri => @recipe.uri), class: "button" %>
+=======
+  <% if User.find_by(id: session[:user_id]).favorites.include? @recipe.title %>
+    <%= link_to "Remove from favorites", favorites_path(session[:user_id], :title => @recipe.title), class: "button" %>
+  <% else %>
+    <%= link_to "Add to favorites", favorites_path(session[:user_id], :title => @recipe.title), class: "button" %>
+>>>>>>> parent of 398ca73... commits present state before changing the recipe iddentifier from the recipe title to the uri
   <% end %>
 <% end %>
 
