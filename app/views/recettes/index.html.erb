@@ -1,10 +1,4 @@
 
-
-<%= form_tag recettes_path, method: "get" do %>
-  <%= text_field_tag(:item) %>
-  <%= submit_tag("Search")%>
-<% end %>
-
 <% unless params[:item] == nil %>
   <h4>Results for "<%= params[:item].capitalize %>"</h4>
 <% end %>
@@ -17,7 +11,8 @@
       <article class="recipe-box column">
         <li><img src="<%= recipe.image %>" alt="<%= recipe.title %>"></li>
         <li><h4><%= recipe.title %></h4></li>
-        <li><%= link_to "See recipe", recette_path(recipe.uri, :item => params[:item]) %></li>
+        <li><%= link_to "See recipe", recette_path() + "?uri=#{URI.encode(recipe.uri)}" %></li>
+        <%#= link_to "Add to favorites", favorite_path(session[:user_id]) + "?item=#{params[:item]}" + "&uri=#{URI.encode(@recipe.uri)}", class: "button" %>
       </article>
     <% end %>
   <% end %>

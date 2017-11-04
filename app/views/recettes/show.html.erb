@@ -5,19 +5,18 @@
 
 <img src="<%= @recipe.image %>" alt="<%= @recipe.title %>">
 <%= link_to "See the original recipe", @recipe.url, class: "button" %>
-
+<%= User.find_by(id: session[:user_id]).my_favorites %>
 <% if session[:user_id] %>
-<<<<<<< HEAD
-  <% if User.find_by(id: session[:user_id]).favorite.include? @recipe.uri %>
-    <%= link_to "Remove from favorites", favorite_path(session[:user_id], :uri => @recipe.uri), class: "button" %>
+  <% found = false %>
+  <% User.find_by(id: session[:user_id]).my_favorites.each do |favorite_array| %>
+    <% if favorite_array[0] == @recipe.title %>
+      <% found = true %>
+    <% end %>
+  <% end %>
+  <% if found == false %>
+    <%= link_to "Add to favorites", favorite_path(session[:user_id]) + "?image=#{@recipe.image}" + "&title=#{@recipe.title}" + "&uri=#{URI.encode(@recipe.uri)}", class: "button" %>
   <% else %>
-    <%= link_to "Add to favorites", favorite_path(session[:user_id], :uri => @recipe.uri), class: "button" %>
-=======
-  <% if User.find_by(id: session[:user_id]).favorites.include? @recipe.title %>
-    <%= link_to "Remove from favorites", favorites_path(session[:user_id], :title => @recipe.title), class: "button" %>
-  <% else %>
-    <%= link_to "Add to favorites", favorites_path(session[:user_id], :title => @recipe.title), class: "button" %>
->>>>>>> parent of 398ca73... commits present state before changing the recipe iddentifier from the recipe title to the uri
+    <%= link_to "Remove from favorites", favorite_path(session[:user_id]) + "?image=#{@recipe.image}" + "&title=#{@recipe.title}" + "&uri=#{URI.encode(@recipe.uri)}", class: "button" %>
   <% end %>
 <% end %>
 

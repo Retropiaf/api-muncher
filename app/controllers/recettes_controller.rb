@@ -2,6 +2,13 @@ class RecettesController < ApplicationController
   def index
     non_paginated_recipes = EdamamApiWrapper.list_recipes(params["item"])
 
+    if session[:user_id] && params["item"].present?
+      user = User.find_by_id(session[:user_id])
+      user.recent_search << params["item"]
+      user.save
+    end
+
+
     non_paginated_recipes == [] if non_paginated_recipes == false
 
     @recipes = non_paginated_recipes.paginate(:page => params[:page], per_page: 9)
@@ -21,10 +28,10 @@ class RecettesController < ApplicationController
 
 
 
-    @recipe = EdamamApiWrapper.find_recipe(params["item"], params["id"])
+    @recipe = EdamamApiWrapper.find_recipe(params["uri"])
     if @recipe == false
       flash[:status] = :failure
-      flash[:message] = "Could not find \"#{params["id"]}\" recipe"
+      flash[:message] = "Could not find recipe"
       return redirect_back(fallback_location: root_path)
     end
   end

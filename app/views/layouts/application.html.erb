@@ -14,6 +14,7 @@
       <div class="log-button">
         <% if session[:user_id] %>
           <%= link_to("Log out", logout_path, method: :post, class: "button") %>
+          <%= link_to("My Favorites", favorites_path, class: "button") %>
         <% else %>
           <%= link_to("Log in with GitHub", github_login_path(:provider => "github"), class: "button") %>
           <%= link_to("Log in with Google", google_login_path(:provider => "google_oauth2"), class: "button") %>
@@ -35,7 +36,23 @@
             <% end %>
         </ul>
       </section>
-      
+
+      <section class="search-bar">
+        <%= form_tag recettes_path, method: "get" do %>
+          <%= text_field_tag(:item) %>
+          <% if session[:user_id] %>
+            <span>Your recent search: </span>
+            <% User.find_by(id: session[:user_id]).recent_search.uniq.each do |term|%>
+              <span><%= link_to term, recettes_path(:item => term) %></span>
+            <% end %>
+            <br>
+          <% end %>
+          <%= submit_tag("Search")%>
+        <% end %>
+      </section>
+
+
+
     <%= yield %>
   </body>
 </html>
