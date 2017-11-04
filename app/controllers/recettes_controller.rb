@@ -1,10 +1,13 @@
 class RecettesController < ApplicationController
   def index
-    non_paginated_recipes = EdamamApiWrapper.list_recipes(params["item"])
+    diet_labels = [params["balanced"], params["high-fiber"], params["high-protein"]]
+
+
+    non_paginated_recipes = EdamamApiWrapper.list_recipes(params["item"],diet_labels)
 
     if session[:user_id] && params["item"].present?
       user = User.find_by_id(session[:user_id])
-      user.recent_search << params["item"]
+      user.recent_search << params["item"] unless user.recent_search.include? params["item"]
       user.save
     end
 

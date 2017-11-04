@@ -45,6 +45,13 @@
             <% User.find_by(id: session[:user_id]).recent_search.uniq.each do |term|%>
               <span><%= link_to term, recettes_path(:item => term) %></span>
             <% end %>
+            <p>Diet options:</p>
+            <%= label_tag :"balanced" %>
+            <%= check_box_tag :"balanced", :"balanced" %>
+            <%= label_tag :"high-protein" %>
+            <%= check_box_tag :"high-protein", :"high-protein" %>
+            <%= label_tag :"high-fiber" %>
+            <%= check_box_tag :"high-fiber", :"high-fiber" %>
             <br>
           <% end %>
           <%= submit_tag("Search")%>

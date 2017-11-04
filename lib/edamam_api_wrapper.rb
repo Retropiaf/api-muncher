@@ -7,10 +7,18 @@ class EdamamApiWrapper
   ID = ENV["ID"]
   KEY = ENV["KEY"]
 
-  def self.list_recipes(item, key = nil, id = nil)
+  def self.list_recipes(item, diet_labels, key = nil, id = nil)
     key ||= KEY
     id ||= ID
-    url = URI.encode(BASE_URL + "app_id=#{id}" + "&app_key=#{key}" + "&q=#{item}") + "&to=100"
+
+    if diet_labels.present?
+      labels = ""
+      diet_labels.each do |label|
+        labels += "&dietLabels=#{label}"
+      end
+    end
+
+    url = URI.encode(BASE_URL + "app_id=#{id}" + "&app_key=#{key}" + "&q=#{item}" + "#{labels}" + "&to=100")
 
     data = HTTParty.get(url)
 
