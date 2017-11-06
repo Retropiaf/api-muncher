@@ -267,5 +267,17 @@ section#recent-search::after {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .so-dropdown:hover .so-dropbtn {
     /*background-color: #3e8e41;*/
+}
 
+
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: rgba(234, 224, 204, 0.8);
+
+  text-align: center;
 }
