@@ -1,7 +1,6 @@
 require_dependency '../../lib/edamam_api_wrapper'
 require_dependency '../../lib/recette'
 
-
 class SessionsController < ApplicationController
 
   def create

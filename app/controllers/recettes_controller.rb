@@ -4,7 +4,8 @@ require_dependency '../../lib/recette'
 class RecettesController < ApplicationController
   def index
 
-    diet_labels = [params["balanced"], params["high-protein"], params["low-fat"], params["low-carb"]]
+    diet_labels = [params["balanced"], params["high-protein"], params["low-fat"], params["low-carb"]
+  ]
 
     health_labels = [
       params["vegan"], params["vegetarian"], params["low-sugar"], params["peanut-free"], params["tree-nut-free"], params["alcohol-free"]
