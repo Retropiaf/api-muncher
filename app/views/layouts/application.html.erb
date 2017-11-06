@@ -87,46 +87,64 @@
 
 
               <section class="so-dropdown">
-                <p class="so-dropbtn">More options</p>
-                 <div class="so-dropdown-content">
-                   <section class="diet-options small-12 medium-8 small-center column">
-                     <p>Diet options:</p>
+                <section class="so-dropbtn">More options:
+                  <div class="so-dropdown-content">
+                    <section class="diet-options small-12 medium-8 small-center column">
+                      <p>Diet options:</p>
+                        <div class="left">
+                          <%= check_box_tag :balanced, :balanced %><%= label_tag :balanced %>
+                        </div>
 
-                     <%= check_box_tag :balanced, :balanced %>
-                     <%= label_tag :balanced %>
+                      <div class="left">
+                        <%= check_box_tag :"high-protein", :"high-protein" %><%= label_tag :"high-protein" %>
+                      </div>
 
-                     <%= check_box_tag :"high-protein", :"high-protein" %>
-                     <%= label_tag :"high-protein" %>
+                      <div class="left">
+                        <%= check_box_tag :"low-fat", :"low-fat" %><%= label_tag :"low-fat" %>
+                      </div>
 
-                     <%= check_box_tag :"low-fat", :"low-fat" %>
-                     <%= label_tag :"low-fat" %>
+                      <div class="left">
+                        <%= check_box_tag :"low-carb", :"low-carb" %><%= label_tag :"low-carb" %>
+                      </div>
+                      <div class="spacer">
+                      </div>
 
-                     <%= check_box_tag :"low-carb", :"low-carb" %>
-                     <%= label_tag :"low-carb" %>
-                   </section>
-                   <section class="diet-restrictions small-12 medium-8 small-center column">
-                     <p>Diet restrictions:</p>
+                    </section>
+                    <br>
+                    <section class="diet-restrictions small-12 medium-8 small-center column">
+                      <p>Diet restrictions:</p>
+                      <div class="left">
+                        <%= check_box_tag :vegan, :vegan %><%= label_tag :vegan %>
+                      </div>
 
-                     <%= check_box_tag :vegan, :vegan %>
-                     <%= label_tag :vegan %>
+                      <div class="left">
+                        <%= check_box_tag :vegetarian, :vegetarian %><%= label_tag :vegetarian %>
+                      </div>
 
-                     <%= check_box_tag :vegetarian, :vegetarian %>
-                     <%= label_tag :vegetarian %>
+                      <div class="left">
+                        <%= check_box_tag :"low-sugar", :"low-sugar" %><%= label_tag :"low-sugar" %>
+                      </div>
 
-                     <%= check_box_tag :"low-sugar", :"low-sugar" %>
-                     <%= label_tag :"low-sugar" %>
+                      <div class="left">
+                        <%= check_box_tag :"peanut-free", :"peanut-free" %><%= label_tag :"peanut-free" %>
+                      </div>
 
-                     <%= check_box_tag :"peanut-free", :"peanut-free" %>
-                     <%= label_tag :"peanut-free" %>
+                      <div class="left">
+                        <%= check_box_tag :"tree-nut-free", :"tree-nut-free" %><%= label_tag :"tree-nut-free" %>
+                      </div>
 
-                     <%= check_box_tag :"tree-nut-free", :"tree-nut-free" %>
-                     <%= label_tag :"tree-nut-free" %>
+                      <div class="left">
+                        <%= check_box_tag :"alcohol-free", :"alcohol-free" %><%= label_tag :"alcohol-free" %>
+                      </div>
+                      <div class="spacer">
+                      </div>
 
-                     <%= check_box_tag :"alcohol-free", :"alcohol-free" %>
-                     <%= label_tag :"alcohol-free" %>
-                   </section>
-                </div>
-              </section>
+                    </section>
+                 </div>
+
+             </section>
+
+            </section>
 
             <% end %>
 

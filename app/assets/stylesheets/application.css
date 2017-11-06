@@ -240,19 +240,31 @@ section#recent-search {
 }
 
 /* Show the dropdown menu on hover */
-.so-dropdown:hover .so-dropdown-content, .so-dropdown-content:hover {
+.so-dropdown:hover .so-dropdown-content {
     display: block;
     position: absolute;
-    margin-left: 26%;
+    background-color: white;
+    /*margin-left: 26%;*/
 
 }
-.diet-options, .diet-restrictions{
-  background-color: white;
+.so-dropdown:hover {
+    display: block;
+}
+.spacer {
+  clear:both;
+  height: 10px;
+}
+.diet-options, .diet-restrictions {
   margin-left: auto;
   margin-right: auto;
   float: none !important;
-  width: 50%;
+  width: 70%;
+  min-width: 300px;
   padding-top: 20px;
+}
+
+.left {
+  float: left;
 }
 /*.diet-restrictions {
   background-color: white;
