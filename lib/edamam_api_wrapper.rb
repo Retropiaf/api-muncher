@@ -7,10 +7,16 @@ class EdamamApiWrapper
   ID = ENV["ID"]
   KEY = ENV["KEY"]
 
-  def self.list_recipes(item, key = nil, id = nil)
+  def self.list_recipes(item, add_labels, key = nil, id = nil)
     key ||= KEY
     id ||= ID
-    url = URI.encode(BASE_URL + "app_id=#{id}" + "&app_key=#{key}" + "&q=#{item}") + "&to=100"
+
+
+
+
+    # add_labels << "&ok=#{dietLabel1}" if dietLabel1
+
+    url = URI.encode(BASE_URL + "app_id=#{id}" + "&app_key=#{key}" + "&q=#{item}" + "&to=100" + "#{add_labels}")
 
     data = HTTParty.get(url)
 
@@ -24,24 +30,38 @@ class EdamamApiWrapper
     end
   end
 
-  def self.find_recipe(item, recip_id, key = nil, id = nil)
+  # def self.find_recipe(item, recip_id, key = nil, id = nil)
+  #   key ||= KEY
+  #   id ||= ID
+  #   url = URI.encode(BASE_URL + "app_id=#{id}" + "&app_key=#{key}" + "&q=#{item}") + "&to=100"
+  #
+  #   data = HTTParty.get(url)
+  #
+  #   if data["hits"]
+  #     my_recipes = data["hits"].map do |recipe_hash|
+  #       Recette.new(recipe_hash["recipe"])
+  #     end
+  #
+  #     my_recipes.each do |recipe_object|
+  #       if recipe_object.title == recip_id
+  #         return recipe_object
+  #       end
+  #     end
+  #   end
+  #   return false
+  # end
+
+  def self.find_recipe(uri, key = nil, id = nil)
     key ||= KEY
     id ||= ID
-    url = URI.encode(BASE_URL + "app_id=#{id}" + "&app_key=#{key}" + "&q=#{item}") + "&to=100"
+    url = URI.encode(BASE_URL + "app_id=#{id}" + "&app_key=#{key}" + "&r=#{uri}")
 
     data = HTTParty.get(url)
 
-    if data["hits"]
-      my_recipes = data["hits"].map do |recipe_hash|
-        Recette.new(recipe_hash["recipe"])
-      end
-
-      my_recipes.each do |recipe_object|
-        if recipe_object.uri == recip_id
-          return recipe_object
-        end
-      end
+    if data.present?
+      Recette.new(data[0])
+    else
+      return false
     end
-    return false
   end
 end

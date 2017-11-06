@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   root 'recettes#index'
 
-  resources :recettes, only: [:index, :show]
+  resources :recettes, only: [:index]
+  get "/recette", to: "recettes#show", as: 'recette'
 
-  get "/users/:id/favorites", to: "users#favorites", as: 'favorites'
+  get "/users/favorites", to: "users#favorites", as: 'favorites'
+  get "/users/:id/favorite", to: "users#favorite", as: 'favorite'
 
   get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
   get "/auth/github", as: 'github_login'
