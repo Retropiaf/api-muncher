@@ -18,29 +18,176 @@
   max-width: 100%;
 }
 
+.bckg-image {
+  z-index: -20;
+  position: absolute;
+  top: -120px;
+  left: 0px;
+  width: 100%;
+  padding: 0px;
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+}
 /* PAGINATION */ /* Move to index CSS? */
 .pagination a, .pagination button {
   display: inline;
 }
 
-/* HEADER */ 
+/* HEADER */
 header {
-  background-color: white;
-    padding-left: 50px;
-    padding-right: 50px;
+  /*background-color: white;*/
+  padding-left: 50px;
+  padding-right: 50px;
+  /*border-bottom: 1px black solid;*/
+  height: 80px;
 }
 header h1 a {
   font-family: 'Rozha One', serif;
-  text-align: center;
+  /*text-align: center;*/
+  color: #E0AFA0;
+  line-height: 80px;
+}
+header h1 a:hover {
   color: #E0AFA0;
 }
-body {
-  /*background-image: url(/images/pinapples.jpeg);*/
-  background-color: #F4F3EE;
+header .button {
+  border-color: #dddddd;
+  background-color: white;
+  color: #E0AFA0;
+  border-radius: 18px;
+}
+header .button:hover {
+  /*border-color: #dddddd;*/
+  background-color: #dddddd;
+  color: #E0AFA0;
+  /*color: white;*/
+}
+
+
+/* MENU ICON */
+section.menu {
+  position: absolute;
+
+
+}
+div.menu-dropdown {
+  height: 28px;
+  margin-top: 25px;
+
+  font-weight: bold;
+}
+
+.menu-dropbtn div {
+  width: 23px;
+  height: 3px;
+  background-color: black;
+  margin: 4px 0;
+}
+
+.menu-dropbtn {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 30px;
 
 }
 
+section.menu:hover #bar1 {
+  /*-webkit-transform: rotate(-45deg) translate(-9px, 6px) ;*/
+    transform-origin: left;
+    transform: translate(25%, 25%) rotate(39deg)
+}
+section.menu:hover #bar2 {
+  opacity: 0;
+}
+section.menu:hover #bar3 {
+  /*-webkit-transform: rotate(45deg) translate(-8px, -8px) ;*/
+    transform-origin: left;
+    transform: translate(25%, 25%) rotate(-39deg)
+}
+
+/* The container <div> - needed to position the dropdown content */
+.menu-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.menu-dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.menu-dropdown-content .button {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+
+}
+
+/* Links inside the dropdown */
+.menu-dropdown-content a {
+    color: #c1c1c1;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.menu-dropdown-content a:hover {
+  background-color: #e8e8e8;
+  color: #8e8e8e;
+}
+
+/* Show the dropdown menu on hover */
+.menu-dropdown:hover .menu-dropdown-content {
+    display: block;
+
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.menu-dropdown:hover .menu-dropbtn {
+    /*background-color: #3e8e41;*/
+
+}
+/*                       */
+
+
+body {
+  /*background-image: url(/images/hambergur-b&w.png);*/
+  /*background-color: #F4F3EE;
+  background-color: white;
+  font-color: #F4F3EE;*/
+}
+
+
 /* SEARCH BAR */
+.search-bar {
+  text-align: center;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  float: none !important;
+}
+/*.submit-button input {
+  background-color: white;
+}*/
 input#item {
   border-radius: 20px;
 }
@@ -49,6 +196,7 @@ section#recent-search {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  width: 60%;
 }
 section#recent-search::after {
 
@@ -58,7 +206,7 @@ section#recent-search::after {
 /* DROPDOWN OPTIONS */
 
 /* Style The Dropdown Button */
-.dropbtn {
+.so-dropbtn {
     /*padding: 16px;
     font-size: 16px;
     border: none;*/
@@ -66,13 +214,13 @@ section#recent-search::after {
 }
 
 /* The container <div> - needed to position the dropdown content */
-.dropdown {
+.so-dropdown {
     /*position: relative;*/
     display: block;
 }
 
 /* Dropdown Content (Hidden by Default) */
-.dropdown-content {
+.so-dropdown-content {
     display: none;
     /*position: absolute;
     background-color: #f9f9f9;*/
@@ -82,7 +230,7 @@ section#recent-search::after {
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+.so-dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -90,14 +238,34 @@ section#recent-search::after {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+.so-dropdown-content a:hover {background-color: #f1f1f1}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+.so-dropdown:hover .so-dropdown-content {
     display: block;
+    position: absolute;
+    margin-left: 26%;
+
 }
+.diet-options, .diet-restrictions{
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  float: none !important;
+  width: 50%;
+  padding-top: 20px;
+}
+/*.diet-restrictions {
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  float: none !important;
+  width: 50%;
+  padding-top:
+}*/
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
+.so-dropdown:hover .so-dropbtn {
     /*background-color: #3e8e41;*/
+
 }

@@ -1,14 +1,19 @@
 
 <% unless params[:item] == nil %>
-  <h4>Results for "<%= params[:item].capitalize %>"</h4>
+  <section class="small-12 medium-12 column">
+    <h4>Results for "<%= params[:item].capitalize %>"</h4>
+  </section>
 <% end %>
 
-<%= will_paginate @recipes %>
 
-<ul class="row small-up-1 medium-up-3">
+<section class="small-12 medium-12 column">
+  <%= will_paginate @recipes %>
+</section>
+
+<ul>
   <% if @recipes.count > 0 %>
     <% @recipes.each do |recipe| %>
-      <article class="recipe-box column">
+      <article class="recipe-box small-1 medium-3 column">
         <li><img src="<%= recipe.image %>" alt="<%= recipe.title %>"></li>
         <li><h4><%= recipe.title %></h4></li>
         <li><%= link_to "See recipe", recette_path() + "?uri=#{URI.encode(recipe.uri)}" %></li>
@@ -17,4 +22,6 @@
   <% end %>
 </ul>
 
-<%= will_paginate @recipes %>
+<section class="small-12 medium-12 column">
+  <%= will_paginate @recipes %>
+</section>
