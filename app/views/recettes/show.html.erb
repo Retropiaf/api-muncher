@@ -5,7 +5,6 @@
 
 <img src="<%= @recipe.image %>" alt="<%= @recipe.title %>">
 <%= link_to "See the original recipe", @recipe.url, class: "button" %>
-<%= User.find_by(id: session[:user_id]).my_favorites %>
 <% if session[:user_id] %>
   <% found = false %>
   <% User.find_by(id: session[:user_id]).my_favorites.each do |favorite_array| %>

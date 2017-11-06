@@ -6,22 +6,31 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Rozha+One" rel="stylesheet">
   </head>
 
-  <body>
-    <header>
-      <h1>Recettes Muncher</h1>
-      <div class="log-button">
-        <% if session[:user_id] %>
-          <%= link_to("Log out", logout_path, method: :post, class: "button") %>
-          <%= link_to("My Favorites", favorites_path, class: "button") %>
-        <% else %>
-          <%= link_to("Log in with GitHub", github_login_path(:provider => "github"), class: "button") %>
-          <%= link_to("Log in with Google", google_login_path(:provider => "google_oauth2"), class: "button") %>
-          <%= link_to("Log in with Facebook", facebook_login_path(:provider => "facebook"), class: "button") %>
-        <% end %>
-      </div>
+  <body class="row">
 
+    <header class="row">
+
+      <h1 class="small-12 medium-6"> <%= link_to "Recettes Muncher", root_path %></h1>
+
+      <% if session[:user_id] %>
+        <span class="header-button small-12 medium-3"><%= link_to("Log out", logout_path, method: :post, class: "button") %></span>
+        <span class="header-button small-12 medium-3"><%= link_to("My Favorites", favorites_path, class: "button") %></span>
+
+
+      <% else %>
+        <div id="loging" class="dropdown">
+          <button class="dropbtn">Log in</button>
+          <div id="loging" class="dropdown-content">
+            <%= link_to("Log in with GitHub", github_login_path(:provider => "github"), class: "button") %>
+            <%= link_to("Log in with Google", google_login_path(:provider => "google_oauth2"), class: "button") %>
+            <%= link_to("Log in with Facebook", facebook_login_path(:provider => "facebook"), class: "button") %>
+          </div>
+        </div>
+
+      <% end %>
     </header>
 
     <section class="flash <%= flash[:status] %>">
@@ -37,22 +46,48 @@
         </ul>
       </section>
 
-      <section class="search-bar">
+      <section class="search-bar small-12 medium-8">
         <%= form_tag recettes_path, method: "get" do %>
           <%= text_field_tag(:item) %>
           <% if session[:user_id] %>
-            <span>Your recent search: </span>
-            <% User.find_by(id: session[:user_id]).recent_search.uniq.each do |term|%>
-              <span><%= link_to term, recettes_path(:item => term) %></span>
-            <% end %>
-            <p>Diet options:</p>
-            <%= label_tag :"balanced" %>
-            <%= check_box_tag :"balanced", :"balanced" %>
-            <%= label_tag :"high-protein" %>
-            <%= check_box_tag :"high-protein", :"high-protein" %>
-            <%= label_tag :"high-fiber" %>
-            <%= check_box_tag :"high-fiber", :"high-fiber" %>
-            <br>
+            <section id="recent-search">
+              <span>Your recent search: </span>
+              <% User.find_by(id: session[:user_id]).recent_search.uniq.each do |term|%>
+                <span><%= link_to term.capitalize, recettes_path(:item => term) %>,</span>
+                <% end %>
+            </section>
+
+
+
+            <section  class="dropdown">
+              <p class="dropbtn">More options</p>
+               <div class="dropdown-content">
+                <p>Diet options:</p>
+                <%= label_tag :balanced %>
+                <%= check_box_tag :balanced, :balanced %>
+                <%= label_tag :"high-protein" %>
+                <%= check_box_tag :"high-protein", :"high-protein" %>
+                <%= label_tag :"low-fat" %>
+                <%= check_box_tag :"low-fat", :"low-fat" %>
+                <%= label_tag :"low-carb" %>
+                <%= check_box_tag :"low-carb", :"low-carb" %>
+
+                <p>Diet restrictions:</p>
+                <%= label_tag :vegan %>
+                <%= check_box_tag :vegan, :vegan %>
+                <%= label_tag :vegetarian %>
+                <%= check_box_tag :vegetarian, :vegetarian %>
+                <%= label_tag :"low-sugar" %>
+                <%= check_box_tag :"low-sugar", :"low-sugar" %>
+                <%= label_tag :"peanut-free" %>
+                <%= check_box_tag :"peanut-free", :"peanut-free" %>
+                <%= label_tag :"tree-nut-free" %>
+                <%= check_box_tag :"tree-nut-free", :"tree-nut-free" %>
+                <%= label_tag :"alcohol-free" %>
+                <%= check_box_tag :"alcohol-free", :"alcohol-free" %>
+              </div>
+            </section>
+
           <% end %>
           <%= submit_tag("Search")%>
         <% end %>

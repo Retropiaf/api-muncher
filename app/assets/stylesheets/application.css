@@ -14,7 +14,90 @@
  *= require_self
  */
 
+.row {
+  max-width: 100%;
+}
+
 /* PAGINATION */ /* Move to index CSS? */
 .pagination a, .pagination button {
   display: inline;
+}
+
+/* HEADER */ 
+header {
+  background-color: white;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+header h1 a {
+  font-family: 'Rozha One', serif;
+  text-align: center;
+  color: #E0AFA0;
+}
+body {
+  /*background-image: url(/images/pinapples.jpeg);*/
+  background-color: #F4F3EE;
+
+}
+
+/* SEARCH BAR */
+input#item {
+  border-radius: 20px;
+}
+section#recent-search {
+  height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+section#recent-search::after {
+
+}
+
+
+/* DROPDOWN OPTIONS */
+
+/* Style The Dropdown Button */
+.dropbtn {
+    /*padding: 16px;
+    font-size: 16px;
+    border: none;*/
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    /*position: relative;*/
+    display: block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    /*position: absolute;
+    background-color: #f9f9f9;*/
+    min-width: 160px;
+    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    /*background-color: #3e8e41;*/
 }
