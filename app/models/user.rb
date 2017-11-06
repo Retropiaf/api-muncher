@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  has_one :favorite
 
   def self.from_auth_hash(auth_hash, provider)
     user = new

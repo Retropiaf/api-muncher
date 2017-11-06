@@ -240,7 +240,7 @@ section#recent-search {
 }
 
 /* Show the dropdown menu on hover */
-.so-dropdown:hover .so-dropdown-content {
+.so-dropdown:hover .so-dropdown-content, .so-dropdown-content:hover {
     display: block;
     position: absolute;
     margin-left: 26%;
@@ -270,7 +270,7 @@ section#recent-search {
 
 
 .footer {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   left: 0;

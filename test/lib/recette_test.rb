@@ -36,7 +36,7 @@ describe "Recette" do
     }.must_raise ArgumentError
   end
 
-  it "has a label accessible trough the title variable and a uri " do
+  it "has an accessible name and uri" do
     my_recette = Recette.new({"label" => "I'm a label", "uri" => "httpimuri"})
     my_recette.must_respond_to :title
     my_recette.must_respond_to :uri
