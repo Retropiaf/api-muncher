@@ -74,7 +74,7 @@
 
               <section id="recent-search" class="small-12 medium-8 small-centered column">
                 <span>Your recent search: </span>
-                <% unless User.find_by(id: session[:user_id]).recent_search == [] %>
+                <% unless User.find_by(id: session[:user_id]) == nil || User.find_by(id: session[:user_id]).recent_search == [] %>
                   <% User.find_by(id: session[:user_id]).recent_search.each do |term|%>
                     <% unless term == nil %>
                       <span><%= link_to term.capitalize, recettes_path(:item => term) %>,</span>
