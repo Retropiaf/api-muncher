@@ -22,9 +22,9 @@
   z-index: -20;
   position: absolute;
   top: -120px;
-  left: 0px;
+  left: 0;
   width: 100%;
-  padding: 0px;
+  padding: 0;
   /* Set rules to fill background */
   min-height: 100%;
   min-width: 1024px;
@@ -198,9 +198,6 @@ section#recent-search {
   text-overflow: ellipsis;
   width: 60%;
 }
-section#recent-search::after {
-
-}
 
 
 /* DROPDOWN OPTIONS */
@@ -238,7 +235,9 @@ section#recent-search::after {
 }
 
 /* Change color of dropdown links on hover */
-.so-dropdown-content a:hover {background-color: #f1f1f1}
+.so-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
 
 /* Show the dropdown menu on hover */
 .so-dropdown:hover .so-dropdown-content {
@@ -265,9 +264,8 @@ section#recent-search::after {
 }*/
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.so-dropdown:hover .so-dropbtn {
-    /*background-color: #3e8e41;*/
-}
+
+
 
 
 
@@ -278,6 +276,5 @@ section#recent-search::after {
   left: 0;
   padding: 1rem;
   background-color: rgba(234, 224, 204, 0.8);
-
   text-align: center;
 }
