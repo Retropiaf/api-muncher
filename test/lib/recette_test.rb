@@ -2,11 +2,11 @@ require 'test_helper'
 
 describe "Recette" do
   it "can be created" do
-    my_recette = Recette.new({"label" => "I'm a label"})
+    my_recette = Recette.new({"label" => "I'm a label", "uri" => "I'm a valid uri"})
     my_recette.wont_be_nil
   end
 
-  it "can't be created without a label key" do
+  it "can't be created without a label and an uri key" do
     proc {
       Recette.new({"source" => "I'm a source"})
     }.must_raise ArgumentError
@@ -17,6 +17,18 @@ describe "Recette" do
       Recette.new({"label" => nil})
     }.must_raise ArgumentError
     proc {
+      Recette.new({"uri" => ""})
+  }.must_raise ArgumentError
+  proc {
+    Recette.new({"uri" => nil})
+  }.must_raise ArgumentError
+  proc {
+    Recette.new({"uri" => "imuri"})
+  }.must_raise ArgumentError
+  proc {
+    Recette.new({"label" => "imlabel"})
+  }.must_raise ArgumentError
+    proc {
       Recette.new({})
     }.must_raise ArgumentError
     proc {
@@ -24,14 +36,16 @@ describe "Recette" do
     }.must_raise ArgumentError
   end
 
-  it "has a label accessible trough the title variable" do
-    my_recette = Recette.new({"label" => "I'm a label"})
+  it "has a label accessible trough the title variable and a uri " do
+    my_recette = Recette.new({"label" => "I'm a label", "uri" => "httpimuri"})
     my_recette.must_respond_to :title
+    my_recette.must_respond_to :uri
     my_recette.title.must_equal "I'm a label"
+    my_recette.uri.must_equal "httpimuri"
   end
 
   it "has accessible optional parameters" do
-    my_recette = Recette.new({"label" => "I'm a label"})
+    my_recette = Recette.new({"label" => "I'm a label", "uri" => "httpimuri"})
     my_recette.wont_be_nil
 
     my_recette.image.must_equal Recette::NO_IMAGE
@@ -49,6 +63,7 @@ describe "Recette" do
 
     hash = {}
     hash["label"] = "Another label"
+    hash["uri"] = "workinguri"
     hash["image"] = "https://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg"
     hash["url"] = "http://www.theuselessweb.com/"
     hash["ingredientLines"] = ["I'm an ingredient", "I'm an ingredient too!"]

@@ -3,7 +3,7 @@ require 'test_helper'
 describe EdamamApiWrapper do
   it "Can list a group of recipes" do
     VCR.use_cassette("recipes") do
-      recipes = EdamamApiWrapper.list_recipes("apple")
+      recipes = EdamamApiWrapper.list_recipes("apple", "")
       recipes.must_be_instance_of Array
       recipes.length.must_be :>, 0
       recipes.each do |recipe|
@@ -13,20 +13,20 @@ describe EdamamApiWrapper do
   end
   it "returns false for a broken request" do
     VCR.use_cassette("recipes") do
-      recipes = EdamamApiWrapper.list_recipes("apple", "BOGUS", "SUPERBOGUUUUS")
+      recipes = EdamamApiWrapper.list_recipes("apple", "", "BOGUS", "SUPERBOGUUUUS")
       recipes.must_equal false
     end
   end
   it "Can find a particular recipe" do
     VCR.use_cassette("recipes") do
-      recipe = EdamamApiWrapper.find_recipe("apple", "Apple Chips")
+      recipe = EdamamApiWrapper.find_recipe( URI.encode("http://www.edamam.com/ontologies/edamam.owl%23recipe_637913ec61d9da69eb451818c3293df2"))
       recipe.must_be_instance_of Recette
       recipe.title.must_equal "Apple Chips"
     end
   end
   it "returns false for a broken request" do
     VCR.use_cassette("recipes") do
-      recipe = EdamamApiWrapper.find_recipe("apple", "Apple Chips", "BOGUS", "SUPERBOGUUUUS")
+      recipe = EdamamApiWrapper.find_recipe(URI.encode("http://www.edamam.com/ontologies/edamam.owl%23recipe_637913ec61d9da69eb451818c3293df2"), "BOGUS", "SUPERBOGUUUUS")
       recipe.must_equal false
     end
   end
